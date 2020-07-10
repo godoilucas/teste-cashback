@@ -1,21 +1,39 @@
 # **Teste Cashback**
-## **Inicialização do arquivo**
-Para uma correta execução é necessário possuir uma instancia de banco de dados MySQL.
+## **Atualizado**
+### Atualizado em 10/07/2020:
+- Alteração nas rotas;
+- Utilização de ORM (Sequelize);
+- Mudança na autenticação;
 
-Após realizar o dowload do projeto será necessário realizar a configuração do arquivo .env (variáveis ambiente). No projeto há um arquivo com o exemplo (.env.exemplo).
+### Próximos passos:
+- Inclusão de logout utilizando blacklist com redis;
+- Testes automatizados (jest);
+- Validações de campos;
+- Autorização (foi implementado apenas autenticação jwt, mas não autoriração)
 
-Ao iniciar o servidor, a conexão com o banco de dados será efetuada e as tabelas serão criadas automaticamente (/src/config/tabelas.js)
+### **Executar projeto**
+Ao realizar o download do projeto, executar o comando 'npm install'
 
-Após realizadas todas as configurações, executar os seguintes comandos:
+#### Configuração Sequelize
+É necessário possuir uma instancia do banco de dados rodando. Eu utilizei MySQL. Caso queira alterar, deverá realizar o npm install da base desejada (que seja aceita pelo sequelize).
+
+Também será necessário configurar o arquivo .env (com as variáveis de ambiente). No projeto há um arquivo com o exemplo (.env.exemplo).
+
+Executar os seguintes comandos do sequelize para criação das tabelas e execução dos seeders.
+
 ```
-npm install
-npm start
+npx sequelize-cli db:migrate
+npx sequelize-cli db:seed:all
 ```
-O projeto possui as rotas abaixo configuradas:
 
-#### POST( '/cadastro' )
-//Reponsável pelo cadastro do Revendedor. (Não necessita autenticação)
-Formato do body enviado
+Após realizadas todas as configurações, o servidor já pode ser iniciado com o comando 'npm start'
+
+### Rotas
+
+#### POST( '/revendedor/cadastro' )
+- Reponsável pelo cadastro do Revendedor. Não necessita autenticação
+
+- Parâmetros de entrada
 ```
 {
     nome: 'Nome dx revendedor(a)',
@@ -25,41 +43,50 @@ Formato do body enviado
 }
 ```
 
-#### POST( '/login' )
-//Reponsável por validar login. (Não necessita autenticação | Retorna token de autenticação)
-Formato do body enviado
+#### POST( '/revendedor/login' )
+- Responsável por validar o login do usuário. Não necessita autenticação. Retorna o token no header 'Authorization'
+
+- Parâmetros de entrada
 ```
 {
     email: 'revendedor@hotmail.com',
     senha: 'pass'
 }
-```
-#### GET( '/compras' )
-//Reponsável por listar as compras
 
-#### POST( '/compras' )
-//Responsável por cadastrar uma nova compra. (Todos outros campos não estão vindo do formulário)
-Formato do body enviado
+
+```
+#### GET( '/revendedor/:revendedorId/compras' )
+- Responsável por listar todas as compras de um revendedor
+
+
+#### GET( '/revendedor/:revendedorId/compras/:id' )
+- Responsável por listar uma compra específica de um revendedor
+
+
+#### POST( '/revendedor/:revendedorId/compras' )
+- Responsável por cadastrar uma nova compra para um revendedor específico.
+
+- Parâmetros de entrada
 ```
 {
     valor: 1000.00
 }
 ```
 
-#### GET( '/compras/:id' )
-//Reponsável por listar uma compra em específico
 
-#### PATCH( '/compras/:id' )
-//Reponsável por atualizar uma compra. Fixada para atualizar apenas status e quando o mesmo encontra-se no status de "Em Validação"
-Formato do body enviado
+#### PATCH( '/revendedor/:revendedorId/compras/:id' )
+- Reponsável por atualizar uma compra de um revendedor específico. Fixada para atualizar apenas status e quando o mesmo encontra-se no status de "Em Validação"
+
+- Parâmetros de entrada
 ```
 {
     status: Aprovado
 }
 ```
 
-#### DELETE( '/compras/:id' )
-//Reponsável por remover uma compra, somente se esta estiver em status "Em Validação"
+#### DELETE( '/revendedor/:revendedorId/compras/:id' )
+- Reponsável por remover uma compra de um revendedor específico. Fixada para remover apenas quando o status é igual a "Em Validação"
 
-#### GET( '/cashback' )
+
+#### GET( '/revendedor/:revendedorId/cashback' )
 //Reponsável por retornar o acumulado do cashback
