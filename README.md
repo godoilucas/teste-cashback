@@ -98,4 +98,4 @@ npm start
 
 
 #### GET( '/revendedor/:revendedorId/cashback' )
-//Reponsável por retornar o acumulado do cashback
+- Reponsável por retornar o acumulado do cashback do revendedor
