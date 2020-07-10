@@ -4,10 +4,13 @@ const BearerStrategy = require('passport-http-bearer').Strategy;
 const RevendedorController = require('./RevendedorController');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { InvalidArgumentError } = require('../../config/erros');
 
 async function comparaSenhaHash(senha, senhaHash){
     const senhaEhValida = await bcrypt.compare(senha, senhaHash);
-    if(!senhaEhValida) throw new Error('E-mail ou senha inválidos');
+    if(!senhaEhValida) {
+        throw new InvalidArgumentError('E-mail ou senha inválidos');
+    }
 }
 
 passport.use(

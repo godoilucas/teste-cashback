@@ -6,6 +6,7 @@ module.exports = {
             'local',
             { session: false },
             (erro, revendedor, info) => {
+                console.log(erro);
                 if(erro && erro.name === 'InvalidArgumentError'){
                     return res.status(401).json({erro: erro.message});
                 }
