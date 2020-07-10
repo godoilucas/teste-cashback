@@ -1,18 +1,23 @@
 # **Teste Cashback**
 ## **Atualizado**
 ### Atualizado em 10/07/2020:
-- Alteração nas rotas;
-- Utilização de ORM (Sequelize);
-- Mudança na autenticação;
+- Alteração nas rotas
+- Utilização de ORM (Sequelize)
+- Mudança na autenticação
 
 ### Próximos passos:
-- Inclusão de logout utilizando blacklist com redis;
-- Testes automatizados (jest);
-- Validações de campos;
+- Inclusão de logout utilizando blacklist com redis
+- Validações de campos
+- Refresh do token
 - Autorização (foi implementado apenas autenticação jwt, mas não autoriração)
+- Testes automatizados (jest)
 
 ### **Executar projeto**
-Ao realizar o download do projeto, executar o comando 'npm install'
+Ao realizar o download do projeto, executar o comando 
+
+```
+npm install
+```
 
 #### Configuração Sequelize
 É necessário possuir uma instancia do banco de dados rodando. Eu utilizei MySQL. Caso queira alterar, deverá realizar o npm install da base desejada (que seja aceita pelo sequelize).
@@ -26,7 +31,11 @@ npx sequelize-cli db:migrate
 npx sequelize-cli db:seed:all
 ```
 
-Após realizadas todas as configurações, o servidor já pode ser iniciado com o comando 'npm start'
+Após realizadas todas as configurações, o servidor já pode ser iniciado com o comando 
+
+```
+npm start
+```
 
 ### Rotas
 
