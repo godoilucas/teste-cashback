@@ -9,13 +9,13 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       valor: {
-        type: Sequelize.DECIMAL
+        type: Sequelize.DECIMAL(7,2)
       },
       percent_cashback: {
         type: Sequelize.FLOAT
       },
       cashback: {
-        type: Sequelize.DECIMAL
+        type: Sequelize.DECIMAL(7,2)
       },
       status: {
         type: Sequelize.STRING

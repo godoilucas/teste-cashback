@@ -14,9 +14,9 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Compras.init({
-    valor: DataTypes.DECIMAL,
+    valor: DataTypes.DECIMAL(7,2),
     percent_cashback: DataTypes.FLOAT,
-    cashback: DataTypes.DECIMAL,
+    cashback: DataTypes.DECIMAL(7,2),
     status: DataTypes.STRING
   }, {
     sequelize,

@@ -3,7 +3,6 @@ const express       = require('express');
 const bodyParser    = require('body-parser');
 const morgan        = require("morgan");
 const routes        = require('../app/routes');
-const auth          = require('./auth');
 const app           = express();
 
 app.use(morgan("combined"));
