@@ -32,3 +32,17 @@ passport.use(
         }
     )
 );
+
+passport.use(
+    new BearerStrategy(
+        async (token, done) =>{
+            try {
+                const payload = jwt.verify(token, process.env.JWT_SECRET);
+                const revendedor = await RevendedorController.buscaRevendedorPorId(payload.id)
+                done(null, revendedor, { token: token });
+            } catch (error) {
+                done(error);
+            }
+        }
+    )
+);

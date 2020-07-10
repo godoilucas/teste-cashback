@@ -62,7 +62,7 @@ function criaTokenJWT(revendedor){
   
     const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '15m' });
     return token;
-  }
+}
 
 class RevendedorController{
     login(req, res){

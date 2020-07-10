@@ -7,6 +7,6 @@ const middlewaresAutenticacao = require('../controllers/middlewaresAtenticacao')
 router
     .post('/revendedor/login', middlewaresAutenticacao.local, revendedorController.login)
     .post('/revendedor/cadastro', revendedorController.cadastro)
-    .get('/revendedor/cashback', revendedorController.exibeCashbackAcumulado);
+    .get('/revendedor/cashback', middlewaresAutenticacao.bearer, revendedorController.exibeCashbackAcumulado);
 
 module.exports = router;
