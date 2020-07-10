@@ -1,4 +1,5 @@
 const fetch = require('node-fetch');
+const db = require('../models');
 
 class RevendedorController{
     login(req, res){
@@ -9,12 +10,13 @@ class RevendedorController{
         res.status(200).json("Cadastro");
     }
 
-    buscaRevendedorPorEmail(email){
+    static buscaRevendedorPorEmail(email){
 
     }
 
-    buscaRevendedorPorId(id){
-
+    static async buscaRevendedorPorId(id){
+        const revendedor = await db.Revendedores.findOne({ where: { id: id }});
+        return revendedor;        
     }
 
     exibeCashbackAcumulado(req, res){
