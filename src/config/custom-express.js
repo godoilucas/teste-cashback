@@ -5,6 +5,8 @@ const morgan        = require("morgan");
 const routes        = require('../app/routes');
 const app           = express();
 
+const estrategiasAutenticacao = require('../app/controllers/estrategiasAutenticacao');
+
 app.use(morgan("combined"));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
